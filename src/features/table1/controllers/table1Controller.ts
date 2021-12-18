@@ -3,8 +3,8 @@ import { getConnection } from "../../../database/connections/database-connection
 
 export class ExempleController {
     async createFunction(x: string, y: number) {
-        let query = getConnection().manager.query;
-        let insertExemple: string = await query(
+        let connection = getConnection();
+        let insertExemple: string = await connection.manager.query(
             `
             INSERT INTO public.table
             (x, y)
@@ -16,16 +16,16 @@ export class ExempleController {
     }
 
     async readFunction() {
-        let query = getConnection().manager.query;
-        let selectExemple = await query(`
+        let connection = getConnection();
+        let selectExemple = await connection.manager.query(`
         SELECT * FROM public.table ORDER BY column ASC
         `);
         return selectExemple;
     }
 
     async updateFunction(uid: string, y: number, z: string) {
-        let query = getConnection().manager.query;
-        let insertExemple: string = await query(
+        let connection = getConnection();
+        let insertExemple: string = await connection.manager.query(
             `
             UPDATE public.table t SET 
             t.column1 = $2,
@@ -37,8 +37,8 @@ export class ExempleController {
     }
 
     async deleteFunction(uid: string) {
-        let query = getConnection().manager.query;
-        let deleteExemple = await query(
+        let connection = getConnection();
+        let deleteExemple = await connection.manager.query(
             `
             DELETE * FROM public.table WHERE uid = $1
             `,
